@@ -52,6 +52,7 @@ public class GestionCreditos extends HorizontalLayout {
         grid = new Grid<>(Credito.class);
         grid.setColumns("cliente", "prestamo", "tasaInteres", "plazo", "valorCuotas");
         grid.setItems(listaCreditos.getListaCreditos());
+        grid.getColumnByKey("plazo").setHeader("Plazo (Meses)");
         grid.asSingleSelect().addValueChangeListener(event -> {
             Credito selectedCredito = event.getValue();
             if (selectedCredito != null) {
@@ -78,7 +79,7 @@ public class GestionCreditos extends HorizontalLayout {
         ComboBox<Cliente> clientescbo = new ComboBox<>();
         TextField prestamoField = new TextField("Prestamo");
         TextField tasaInteresField = new TextField("Tasa Interes");
-        TextField plazoField = new TextField("Plazo");
+        TextField plazoField = new TextField("Plazo (Meses)");
 
         clientescbo.setItems(listaClientes.obtenerUsuarios());
         clientescbo.setValue(listaClientes.obtenerUsuarios().stream().findFirst().get());
