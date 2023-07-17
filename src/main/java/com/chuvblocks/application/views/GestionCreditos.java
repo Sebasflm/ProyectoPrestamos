@@ -114,11 +114,8 @@ public class GestionCreditos extends HorizontalLayout {
 
         clienteField.setReadOnly(true);
         clienteField.setValue(credito.getCliente().toString());
-        prestamoField.setReadOnly(true);
         prestamoField.setValue(String.valueOf(credito.getPrestamo()));
-        tasaInteresField.setReadOnly(true);
         tasaInteresField.setValue(String.valueOf(credito.getTasaInteres()));
-        plazoField.setReadOnly(true);
         plazoField.setValue(String.valueOf(credito.getPlazo()));
 
         FormLayout formLayout = new FormLayout();
@@ -130,8 +127,17 @@ public class GestionCreditos extends HorizontalLayout {
             dialog.close();
         });
 
+        Button saveButton = new Button("Guardar", event -> {
+            credito.setPrestamo(Double.parseDouble(prestamoField.getValue()));
+            credito.setTasaInteres(Double.parseDouble(tasaInteresField.getValue()));
+            credito.setPlazo(Integer.parseInt(plazoField.getValue()));
+            credito.calcularValorCuotas();
+            grid.setItems(listaCreditos.getListaCreditos());
+            dialog.close();
+        });
+
         Button cancelButton = new Button("Cancelar", event -> dialog.close());
-        Div buttonsLayout = new Div(deleteButton, cancelButton);
+        Div buttonsLayout = new Div(cancelButton, saveButton, deleteButton);
 
         dialog.add(formLayout, buttonsLayout);
         dialog.open();

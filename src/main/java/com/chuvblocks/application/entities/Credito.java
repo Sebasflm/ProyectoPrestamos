@@ -71,7 +71,7 @@ public class Credito {
         this.valorCuotas = valorCuotas;
     }
 
-    private void calcularValorCuotas() {
+    public void calcularValorCuotas() {
         double tasaInteresMensual = tasaInteres / 12.0;
         double factor = Math.pow(1 + tasaInteresMensual, plazo);
         valorCuotas = prestamo * (tasaInteresMensual * factor) / (factor - 1);
