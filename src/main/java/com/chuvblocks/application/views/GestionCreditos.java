@@ -22,6 +22,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.PostConstruct;
 
+import java.util.Objects;
+
 @Route("gestionCreditos")
 @PageTitle("Gestión de Créditos")
 public class GestionCreditos extends HorizontalLayout {
@@ -67,6 +69,10 @@ public class GestionCreditos extends HorizontalLayout {
     }
 
     private void abrirDialogoAgregarCredito() {
+        if (listaClientes.obtenerUsuarios().isEmpty()) {
+            Notification.show("No hay clientes registrados");
+            return;
+        }
         Dialog dialog = new Dialog();
         ComboBox<Cliente> clientescbo = new ComboBox<>();
         TextField prestamoField = new TextField("Prestamo");
@@ -74,12 +80,14 @@ public class GestionCreditos extends HorizontalLayout {
         TextField plazoField = new TextField("Plazo");
 
         clientescbo.setItems(listaClientes.obtenerUsuarios());
+        clientescbo.setValue(listaClientes.obtenerUsuarios().stream().findFirst().get());
 
         FormLayout formLayout = new FormLayout();
         formLayout.add(clientescbo, prestamoField, tasaInteresField, plazoField);
 
         Binder<Credito> binder = new Binder<>(Credito.class);
         binder.bind(clientescbo, Credito::getCliente, Credito::setCliente);
+        binder.forField(clientescbo).withValidator(Objects::nonNull, "Debe elegir un cliente");
         binder.forField(prestamoField).withConverter(Double::valueOf, String::valueOf);
         binder.forField(tasaInteresField).withConverter(Double::valueOf, String::valueOf);
         binder.forField(plazoField).withConverter(Integer::valueOf, String::valueOf);
