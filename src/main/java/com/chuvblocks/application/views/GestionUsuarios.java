@@ -39,8 +39,9 @@ public class GestionUsuarios extends HorizontalLayout {
 
         SideNavItem usuarios = new SideNavItem("Usuarios", GestionUsuarios.class, VaadinIcon.USER.create());
         SideNavItem creditos = new SideNavItem("Créditos", GestionCreditos.class, VaadinIcon.MONEY.create());
+        SideNavItem amortizacion = new SideNavItem("Amortización", TablaAmortizacionView.class, VaadinIcon.TABLE.create());
 
-        nav.addItem(usuarios, creditos);
+        nav.addItem(usuarios, creditos,amortizacion);
 
         VerticalLayout content = new VerticalLayout();
 

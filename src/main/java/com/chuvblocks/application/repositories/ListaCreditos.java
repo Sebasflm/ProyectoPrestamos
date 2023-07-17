@@ -23,11 +23,15 @@ public class ListaCreditos {
         return listaCreditos.add(credito);
     }
 
-    public boolean borrarCredito(Credito credito) {
-        return listaCreditos.remove(credito);
+    public Credito buscarCreditoPorCliente(Cliente cliente) {
+        return listaCreditos.stream().filter(credito -> credito.getCliente().equals(cliente)).findFirst().orElse(null);
     }
 
-    public boolean borrarCreditoPorCliente(Cliente cliente) {
-        return listaCreditos.removeIf(credito -> credito.getCliente().equals(cliente));
+    public void borrarCredito(Credito credito) {
+        listaCreditos.remove(credito);
+    }
+
+    public void borrarCreditoPorCliente(Cliente cliente) {
+        listaCreditos.removeIf(credito -> credito.getCliente().equals(cliente));
     }
 }
