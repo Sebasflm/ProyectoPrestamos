@@ -2,14 +2,14 @@ package com.chuvblocks.application.entities;
 
 import java.util.Objects;
 
-public class Usuario {
+public class Cliente {
     private String nombre;
-    private int edad;
+    private String apellido;
     private String cedula;
 
-    public Usuario(String nombre, int edad, String cedula) {
+    public Cliente(String nombre, String apellido, String cedula) {
         this.nombre = nombre;
-        this.edad = edad;
+        this.apellido = apellido;
         this.cedula = cedula;
     }
 
@@ -17,21 +17,13 @@ public class Usuario {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Usuario usuario = (Usuario) o;
+        Cliente usuario = (Cliente) o;
         return Objects.equals(cedula, usuario.cedula);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(cedula);
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
     }
 
     public String getNombre() {
@@ -42,11 +34,24 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " " + apellido;
     }
 }
